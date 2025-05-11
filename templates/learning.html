@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Stock Market Guide</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    .topic-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .active {
+      max-height: 1000px;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans">
+  <div class="max-w-6xl mx-auto p-6">
+    <header class="text-center mb-10">
+      <h1 class="text-5xl font-bold text-blue-900 mb-4">📈 Ultimate Stock Market Guide</h1>
+      <p class="text-xl text-gray-600">Comprehensive resource covering all aspects of stock market investing and trading</p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+      <!-- Navigation Menu -->
+      <div class="bg-white p-6 rounded-xl shadow-md sticky top-6 h-fit">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4 border-b pb-2">Table of Contents</h2>
+        <ul class="space-y-3">
+          <li><a href="#basics" class="text-blue-600 hover:underline flex items-center"><span class="mr-2">🔰</span> Market Basics</a></li>
+          <li><a href="#analysis" class="text-blue-600 hover:underline flex items-center"><span class="mr-2">📊</span> Market Analysis</a></li>
+          <li><a href="#strategies" class="text-blue-600 hover:underline flex items-center"><span class="mr-2">♟️</span> Trading Strategies</a></li>
+          <li><a href="#instruments" class="text-blue-600 hover:underline flex items-center"><span class="mr-2">💱</span> Financial Instruments</a></li>
+          <li><a href="#psychology" class="text-blue-600 hover:underline flex items-center"><span class="mr-2">🧠</span> Market Psychology</a></li>
+          <li><a href="#resources" class="text-blue-600 hover:underline flex items-center"><span class="mr-2">📚</span> Learning Resources</a></li>
+        </ul>
+        <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+          <h3 class="font-medium text-blue-800 mb-2">Download Full Guide</h3>
+          <button id="downloadFull" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">Download as PDF</button>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="md:col-span-2 space-y-6">
+        <!-- Market Basics Section -->
+        <section id="basics" class="bg-white p-6 rounded-xl shadow-md topic-card transition duration-300">
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">🔰 Stock Market Basics</h2>
+            <button onclick="downloadSection('basics')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded text-sm">Download</button>
+          </div>
+          
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              What is a Stock?
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">A stock (also known as equity) represents fractional ownership of a corporation. When you buy a company's stock, you're purchasing a small piece of that company, called a share.</p>
+              <p class="text-gray-700 mb-2">Key concepts:</p>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                <li><strong>Common Stock:</strong> Grants voting rights and potential dividends</li>
+                <li><strong>Preferred Stock:</strong> Typically has no voting rights but has higher claim on assets/earnings</li>
+                <li><strong>Market Capitalization:</strong> Total value of all company shares (Share Price × Outstanding Shares)</li>
+                <li><strong>Dividends:</strong> Periodic payments to shareholders from company profits</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              How Stock Markets Work
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Stock markets are exchanges where buyers and sellers meet to trade shares of public companies. Major exchanges include:</p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="border p-3 rounded-lg">
+                  <h4 class="font-semibold">NYSE (New York Stock Exchange)</h4>
+                  <p class="text-sm text-gray-600">World's largest stock exchange by market cap</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h4 class="font-semibold">NASDAQ</h4>
+                  <p class="text-sm text-gray-600">Electronic exchange known for tech companies</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h4 class="font-semibold">London Stock Exchange</h4>
+                  <p class="text-sm text-gray-600">Primary UK stock exchange</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h4 class="font-semibold">Tokyo Stock Exchange</h4>
+                  <p class="text-sm text-gray-600">Largest in Asia by market cap</p>
+                </div>
+              </div>
+              <p class="text-gray-700">Stock prices are determined by supply and demand dynamics in the market.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Trading vs. Investing
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <table class="min-w-full border mb-4">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="py-2 px-4 border text-left">Aspect</th>
+                    <th class="py-2 px-4 border text-left">Investing</th>
+                    <th class="py-2 px-4 border text-left">Trading</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="py-2 px-4 border">Time Horizon</td>
+                    <td class="py-2 px-4 border">Years to decades</td>
+                    <td class="py-2 px-4 border">Minutes to months</td>
+                  </tr>
+                  <tr class="bg-gray-50">
+                    <td class="py-2 px-4 border">Primary Goal</td>
+                    <td class="py-2 px-4 border">Wealth accumulation</td>
+                    <td class="py-2 px-4 border">Short-term profits</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-4 border">Analysis Focus</td>
+                    <td class="py-2 px-4 border">Fundamentals</td>
+                    <td class="py-2 px-4 border">Technicals</td>
+                  </tr>
+                  <tr class="bg-gray-50">
+                    <td class="py-2 px-4 border">Risk Level</td>
+                    <td class="py-2 px-4 border">Moderate</td>
+                    <td class="py-2 px-4 border">High</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-4 border">Activity Level</td>
+                    <td class="py-2 px-4 border">Low</td>
+                    <td class="py-2 px-4 border">High</td>
+                  </tr>
+                </tbody>
+              </table>
+              <p class="text-gray-700">Most successful market participants combine elements of both approaches.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Market Analysis Section -->
+        <section id="analysis" class="bg-white p-6 rounded-xl shadow-md topic-card transition duration-300">
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">📊 Market Analysis Methods</h2>
+            <button onclick="downloadSection('analysis')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded text-sm">Download</button>
+          </div>
+          
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Fundamental Analysis
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Fundamental analysis evaluates securities by examining related economic, financial, and other qualitative and quantitative factors.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Key Financial Statements:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Balance Sheet</h5>
+                  <p class="text-sm text-gray-600">Shows assets, liabilities, and shareholders' equity at a point in time</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Income Statement</h5>
+                  <p class="text-sm text-gray-600">Reports revenue, expenses, and profit over a period</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Cash Flow Statement</h5>
+                  <p class="text-sm text-gray-600">Shows how cash enters and leaves the business</p>
+                </div>
+              </div>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Key Metrics:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li><strong>P/E Ratio:</strong> Price-to-Earnings ratio (Stock Price / EPS)</li>
+                <li><strong>P/B Ratio:</strong> Price-to-Book ratio (Stock Price / Book Value per Share)</li>
+                <li><strong>Debt-to-Equity:</strong> Measures financial leverage</li>
+                <li><strong>ROE:</strong> Return on Equity (Net Income / Shareholder's Equity)</li>
+                <li><strong>Current Ratio:</strong> Measures short-term liquidity</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Technical Analysis
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Technical analysis studies price movements and trading volume to identify patterns and trends.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Chart Types:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Line Charts</h5>
+                  <p class="text-sm text-gray-600">Simple closing price connections</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Bar Charts</h5>
+                  <p class="text-sm text-gray-600">OHLC (Open-High-Low-Close) data</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Candlestick Charts</h5>
+                  <p class="text-sm text-gray-600">Visual price action with color coding</p>
+                </div>
+              </div>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Common Indicators:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h5 class="font-medium">Trend Indicators</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>Moving Averages (SMA, EMA)</li>
+                    <li>MACD (Moving Average Convergence Divergence)</li>
+                    <li>Parabolic SAR</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-medium">Momentum Indicators</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>RSI (Relative Strength Index)</li>
+                    <li>Stochastic Oscillator</li>
+                    <li>CCI (Commodity Channel Index)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-medium">Volume Indicators</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>OBV (On-Balance Volume)</li>
+                    <li>Volume Weighted Average Price (VWAP)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-medium">Volatility Indicators</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>Bollinger Bands</li>
+                    <li>ATR (Average True Range)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Sentiment Analysis
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Sentiment analysis gauges the market's emotional tone to predict price movements.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Sentiment Indicators:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li><strong>Put/Call Ratio:</strong> Measures options market sentiment</li>
+                <li><strong>VIX (Volatility Index):</strong> "Fear gauge" of the market</li>
+                <li><strong>Advance/Decline Line:</strong> Breadth indicator showing market participation</li>
+                <li><strong>Short Interest Ratio:</strong> Measures bearish sentiment</li>
+                <li><strong>News Sentiment Analysis:</strong> AI-powered analysis of news tone</li>
+              </ul>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Contrarian Investing:</h4>
+              <p class="text-gray-700">Many traders use sentiment indicators to identify potential market extremes - when everyone is bullish, it may signal a top, and vice versa.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Trading Strategies Section -->
+        <section id="strategies" class="bg-white p-6 rounded-xl shadow-md topic-card transition duration-300">
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">♟️ Trading Strategies</h2>
+            <button onclick="downloadSection('strategies')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded text-sm">Download</button>
+          </div>
+          
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Long-Term Investing Strategies
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Value Investing</h4>
+              <p class="text-gray-700 mb-4">Popularized by Benjamin Graham and Warren Buffett, focuses on finding undervalued stocks trading below their intrinsic value.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Growth Investing</h4>
+              <p class="text-gray-700 mb-4">Targets companies expected to grow earnings at an above-average rate compared to the market.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Dividend Investing</h4>
+              <p class="text-gray-700 mb-4">Focuses on companies with strong histories of paying and increasing dividends.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Index Investing</h4>
+              <p class="text-gray-700">Passive strategy of buying index funds that track market benchmarks.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Active Trading Strategies
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Day Trading</h4>
+              <p class="text-gray-700 mb-4">Buying and selling securities within the same trading day to capitalize on short-term price movements.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Swing Trading</h4>
+              <p class="text-gray-700 mb-4">Holding positions for several days to weeks to capture short- to medium-term gains.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Scalping</h4>
+              <p class="text-gray-700 mb-4">Making dozens or hundreds of trades per day to profit from small price changes.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Algorithmic Trading</h4>
+              <p class="text-gray-700">Using computer programs to execute trades based on predefined criteria at high speeds.</p>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Options Strategies
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Basic Strategies</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Covered Call</h5>
+                  <p class="text-sm text-gray-600">Selling call options against owned stock to generate income</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Protective Put</h5>
+                  <p class="text-sm text-gray-600">Buying puts to protect against downside risk</p>
+                </div>
+              </div>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Advanced Strategies</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Straddle</h5>
+                  <p class="text-sm text-gray-600">Buying both call and put at same strike price</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Strangle</h5>
+                  <p class="text-sm text-gray-600">Buying out-of-the-money call and put</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Iron Condor</h5>
+                  <p class="text-sm text-gray-600">Combination of bull put and bear call spreads</p>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Butterfly Spread</h5>
+                  <p class="text-sm text-gray-600">Combination of bull and bear spreads with three strike prices</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Financial Instruments Section -->
+        <section id="instruments" class="bg-white p-6 rounded-xl shadow-md topic-card transition duration-300">
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">💱 Financial Instruments</h2>
+            <button onclick="downloadSection('instruments')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded text-sm">Download</button>
+          </div>
+          
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Stocks & Equities
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Equities represent ownership shares in corporations.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Stock Classifications:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">By Market Cap</h5>
+                  <ul class="text-sm text-gray-700 mt-1 space-y-1">
+                    <li>Large-cap (>$10B)</li>
+                    <li>Mid-cap ($2B-$10B)</li>
+                    <li>Small-cap (<$2B)</li>
+                  </ul>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">By Sector</h5>
+                  <ul class="text-sm text-gray-700 mt-1 space-y-1">
+                    <li>Technology</li>
+                    <li>Healthcare</li>
+                    <li>Financials</li>
+                    <li>Consumer</li>
+                  </ul>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">By Style</h5>
+                  <ul class="text-sm text-gray-700 mt-1 space-y-1">
+                    <li>Growth</li>
+                    <li>Value</li>
+                    <li>Blend</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              ETFs & Mutual Funds
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <table class="min-w-full border mb-4">
+                <thead class="bg-gray-100">
+                  <tr>
+                    <th class="py-2 px-4 border text-left">Feature</th>
+                    <th class="py-2 px-4 border text-left">ETF</th>
+                    <th class="py-2 px-4 border text-left">Mutual Fund</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="py-2 px-4 border">Trading</td>
+                    <td class="py-2 px-4 border">Traded like stocks throughout day</td>
+                    <td class="py-2 px-4 border">Priced once at market close</td>
+                  </tr>
+                  <tr class="bg-gray-50">
+                    <td class="py-2 px-4 border">Expense Ratios</td>
+                    <td class="py-2 px-4 border">Typically lower</td>
+                    <td class="py-2 px-4 border">Typically higher</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2 px-4 border">Minimum Investment</td>
+                    <td class="py-2 px-4 border">Share price</td>
+                    <td class="py-2 px-4 border">Often $500-$3,000+</td>
+                  </tr>
+                  <tr class="bg-gray-50">
+                    <td class="py-2 px-4 border">Tax Efficiency</td>
+                    <td class="py-2 px-4 border">More tax-efficient</td>
+                    <td class="py-2 px-4 border">Less tax-efficient</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Popular ETF Categories:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li><strong>Index ETFs:</strong> Track major indices (SPY, QQQ, DIA)</li>
+                <li><strong>Sector ETFs:</strong> Focus on specific industries (XLF, XLV)</li>
+                <li><strong>Bond ETFs:</strong> Fixed income exposure (BND, AGG)</li>
+                <li><strong>Commodity ETFs:</strong> Track gold, oil, etc. (GLD, USO)</li>
+                <li><strong>International ETFs:</strong> Foreign market exposure (EFA, EEM)</li>
+                <li><strong>Smart Beta ETFs:</strong> Factor-based strategies</li>
+                <li><strong>Leveraged/Inverse ETFs:</strong> For advanced traders</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Bonds & Fixed Income
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Bonds are debt instruments representing loans made by investors to borrowers (typically corporations or governments).</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Bond Types:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <h5 class="font-medium">Government Bonds</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>Treasury Bills (T-Bills)</li>
+                    <li>Treasury Notes (T-Notes)</li>
+                    <li>Treasury Bonds (T-Bonds)</li>
+                    <li>TIPS (Inflation-Protected)</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-medium">Corporate Bonds</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>Investment Grade</li>
+                    <li>High Yield (Junk Bonds)</li>
+                    <li>Convertible Bonds</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-medium">Municipal Bonds</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>General Obligation</li>
+                    <li>Revenue Bonds</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-medium">International Bonds</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>Emerging Market Bonds</li>
+                    <li>Eurobonds</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Key Bond Concepts:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                <li><strong>Yield:</strong> Effective interest rate considering price and coupon</li>
+                <li><strong>Duration:</strong> Sensitivity to interest rate changes</li>
+                <li><strong>Credit Rating:</strong> Assessment of default risk (AAA to D)</li>
+                <li><strong>Yield Curve:</strong> Relationship between yields and maturities</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Derivatives
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Derivatives are financial contracts whose value is derived from an underlying asset.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Options</h4>
+              <p class="text-gray-700 mb-2">Contracts giving the right (but not obligation) to buy/sell an asset at a set price.</p>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li><strong>Calls:</strong> Right to buy</li>
+                <li><strong>Puts:</strong> Right to sell</li>
+                <li><strong>American vs. European:</strong> Exercise timing differences</li>
+              </ul>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Futures</h4>
+              <p class="text-gray-700 mb-2">Standardized contracts to buy/sell an asset at a future date and price.</p>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li>Commodity Futures (oil, gold, wheat)</li>
+                <li>Financial Futures (index, interest rate)</li>
+                <li>Currency Futures</li>
+              </ul>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Other Derivatives</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                <li><strong>Swaps:</strong> Agreement to exchange cash flows</li>
+                <li><strong>Warrants:</strong> Long-term options issued by companies</li>
+                <li><strong>CFDs:</strong> Contracts for Difference (popular outside US)</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Market Psychology Section -->
+        <section id="psychology" class="bg-white p-6 rounded-xl shadow-md topic-card transition duration-300">
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">🧠 Market Psychology</h2>
+            <button onclick="downloadSection('psychology')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded text-sm">Download</button>
+          </div>
+          
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Behavioral Finance
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Behavioral finance studies how psychological influences and biases affect financial behaviors.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Common Biases:</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Cognitive Biases</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>Confirmation Bias</li>
+                    <li>Anchoring</li>
+                    <li>Hindsight Bias</li>
+                    <li>Gambler's Fallacy</li>
+                  </ul>
+                </div>
+                <div class="border p-3 rounded-lg">
+                  <h5 class="font-medium">Emotional Biases</h5>
+                  <ul class="list-disc pl-5 text-sm text-gray-700 space-y-1">
+                    <li>Loss Aversion</li>
+                    <li>Overconfidence</li>
+                    <li>Endowment Effect</li>
+                    <li>Herding Behavior</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Market Cycles
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Markets move in recurring cycles influenced by economic conditions and investor psychology.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Stages of Market Cycles:</h4>
+              <div class="space-y-4 mb-4">
+                <div>
+                  <h5 class="font-medium">1. Accumulation Phase</h5>
+                  <p class="text-sm text-gray-700">Informed investors begin buying when prices are low</p>
+                </div>
+                <div>
+                  <h5 class="font-medium">2. Markup Phase</h5>
+                  <p class="text-sm text-gray-700">Prices begin rising, more investors participate</p>
+                </div>
+                <div>
+                  <h5 class="font-medium">3. Distribution Phase</h5>
+                  <p class="text-sm text-gray-700">Smart money begins selling to latecomers</p>
+                </div>
+                <div>
+                  <h5 class="font-medium">4. Markdown Phase</h5>
+                  <p class="text-sm text-gray-700">Prices decline as selling pressure increases</p>
+                </div>
+              </div>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Economic Cycles:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                <li><strong>Expansion:</strong> Growing economy, rising markets</li>
+                <li><strong>Peak:</strong> Maximum economic activity</li>
+                <li><strong>Contraction:</strong> Declining economic indicators</li>
+                <li><strong>Trough:</strong> Bottom of economic activity</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Risk Management
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <p class="text-gray-700 mb-4">Effective risk management is crucial for long-term success in markets.</p>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Key Principles:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li><strong>Position Sizing:</strong> Never risk more than 1-2% of capital on single trade</li>
+                <li><strong>Diversification:</strong> Spread risk across different assets/sectors</li>
+                <li><strong>Stop-Loss Orders:</strong> Automatically exit losing positions</li>
+                <li><strong>Risk-Reward Ratio:</strong> Aim for at least 1:2 (potential loss vs. gain)</li>
+                <li><strong>Hedging:</strong> Using derivatives to offset potential losses</li>
+              </ul>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Common Mistakes:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                <li>Failing to cut losses quickly</li>
+                <li>Overtrading (too many positions)</li>
+                <li>Letting emotions drive decisions</li>
+                <li>Chasing "hot tips" without research</li>
+                <li>Lack of trading plan</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- Learning Resources Section -->
+        <section id="resources" class="bg-white p-6 rounded-xl shadow-md topic-card transition duration-300">
+          <div class="flex justify-between items-center">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">📚 Learning Resources</h2>
+            <button onclick="downloadSection('resources')" class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded text-sm">Download</button>
+          </div>
+          
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Recommended Books
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Investing Classics:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li><strong>The Intelligent Investor</strong> by Benjamin Graham</li>
+                <li><strong>Security Analysis</strong> by Graham & Dodd</li>
+                <li><strong>Common Stocks and Uncommon Profits</strong> by Philip Fisher</li>
+                <li><strong>A Random Walk Down Wall Street</strong> by Burton Malkiel</li>
+              </ul>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Trading & Psychology:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li><strong>Market Wizards</strong> series by Jack Schwager</li>
+                <li><strong>Trading in the Zone</strong> by Mark Douglas</li>
+                <li><strong>Reminiscences of a Stock Operator</strong> by Edwin Lefèvre</li>
+              </ul>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Modern Approaches:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                <li><strong>The Little Book That Still Beats the Market</strong> by Joel Greenblatt</li>
+                <li><strong>One Up On Wall Street</strong> by Peter Lynch</li>
+                <li><strong>The Dhandho Investor</strong> by Mohnish Pabrai</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Online Resources
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Educational Websites:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li><a href="https://www.investopedia.com" class="text-blue-600 hover:underline">Investopedia</a> - Comprehensive financial education</li>
+                <li><a href="https://www.khanacademy.org/economics-finance-domain/core-finance" class="text-blue-600 hover:underline">Khan Academy Finance</a> - Free courses</li>
+                <li><a href="https://www.sec.gov/investor/pubs" class="text-blue-600 hover:underline">SEC Investor Education</a> - Government resources</li>
+              </ul>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Market Data & News:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li><a href="https://finance.yahoo.com" class="text-blue-600 hover:underline">Yahoo Finance</a> - Free market data</li>
+                <li><a href="https://www.bloomberg.com" class="text-blue-600 hover:underline">Bloomberg</a> - Professional-grade news</li>
+                <li><a href="https://www.wsj.com" class="text-blue-600 hover:underline">Wall Street Journal</a> - Financial news</li>
+              </ul>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Analysis Tools:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                <li><a href="https://www.tradingview.com" class="text-blue-600 hover:underline">TradingView</a> - Charting platform</li>
+                <li><a href="https://finviz.com" class="text-blue-600 hover:underline">Finviz</a> - Stock screener</li>
+                <li><a href="https://www.morningstar.com" class="text-blue-600 hover:underline">Morningstar</a> - Fund/stock research</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accordion-item mb-4">
+            <button class="accordion-btn w-full text-left font-medium text-lg text-blue-700 py-2 flex justify-between items-center">
+              Courses & Certifications
+              <span class="accordion-icon">+</span>
+            </button>
+            <div class="accordion-content px-2">
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Free Online Courses:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1 mb-4">
+                <li>Coursera - <a href="https://www.coursera.org/learn/financial-markets" class="text-blue-600 hover:underline">Financial Markets by Yale</a></li>
+                <li>edX - <a href="https://www.edx.org/course/investment-management" class="text-blue-600 hover:underline">Investment Management</a></li>
+                <li>Udemy - Various investing/trading courses (often on sale)</li>
+              </ul>
+              
+              <h4 class="font-semibold text-gray-800 mt-4 mb-2">Professional Certifications:</h4>
+              <ul class="list-disc pl-5 text-gray-700 space-y-1">
+                <li><strong>CFA (Chartered Financial Analyst):</strong> Gold standard for investment professionals</li>
+                <li><strong>Series 7:</strong> For US stockbrokers</li>
+                <li><strong>CMT (Chartered Market Technician):</strong> For technical analysts</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <footer class="text-center text-gray-600 mt-12 mb-6">
+      <p>© <span id="year"></span> Complete Stock Market Guide. All information provided for educational purposes only.</p>
+      <p class="text-sm mt-2">Past performance is not indicative of future results. Investing involves risk including loss of principal.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Accordion functionality
+    document.querySelectorAll('.accordion-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('.accordion-icon');
+        
+        button.classList.toggle('active');
+        content.classList.toggle('active');
+        
+        if(content.classList.contains('active')) {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          icon.textContent = '-';
+        } else {
+          content.style.maxHeight = '0';
+          icon.textContent = '+';
+        }
+      });
+    });
+
+    // PDF Download Functions
+    const { jsPDF } = window.jspdf;
+
+    function downloadSection(sectionId) {
+      const element = document.getElementById(sectionId);
+      const title = element.querySelector('h2').textContent;
+      
+      html2canvas(element).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgWidth = 210; // A4 width in mm
+        const pageHeight = 295; // A4 height in mm
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 0;
+
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+
+        pdf.save(`${title}.pdf`);
+      });
+    }
+
+    document.getElementById('downloadFull').addEventListener('click', () => {
+      const element = document.querySelector('.md\\:col-span-2');
+      const title = 'Complete Stock Market Guide';
+      
+      html2canvas(element).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const imgWidth = 210; // A4 width in mm
+        const pageHeight = 295; // A4 height in mm
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
+        let position = 0;
+
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          pdf.addPage();
+          pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+
+        pdf.save(`${title}.pdf`);
+      });
+    });
+  </script>
+</body>
+</html>

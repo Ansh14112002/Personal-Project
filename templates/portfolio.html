@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100 font-sans">
+    <div class="max-w-7xl mx-auto p-5">
+      <!-- Header -->
+      <header class="text-center mb-8">
+        <h1 class="text-4xl font-bold text-gray-900">📊 My Portfolio</h1>
+      </header>
+
+      <!-- Add Stock Form -->
+      <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Add a Stock</h2>
+        <form action="/add_stock" method="post" class="flex flex-col space-y-4">
+          <input
+            type="text"
+            name="symbol"
+            placeholder="Stock Symbol"
+            required
+            class="p-4 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="number"
+            name="quantity"
+            placeholder="Quantity"
+            step="any"
+            required
+            class="p-4 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <input
+            type="number"
+            name="buy_price"
+            placeholder="Buy Price"
+            step="any"
+            required
+            class="p-4 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button
+            type="submit"
+            class="bg-green-600 text-white py-3 px-6 rounded-md hover:bg-green-700 transition duration-300"
+          >
+            Add Stock
+          </button>
+        </form>
+      </div>
+
+      <!-- Portfolio Summary Table -->
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Portfolio Summary</h2>
+        <table class="w-full table-auto border-collapse mb-8">
+          <thead>
+            <tr>
+              <th class="px-4 py-2 border text-left text-gray-700">Symbol</th>
+              <th class="px-4 py-2 border text-left text-gray-700">Quantity</th>
+              <th class="px-4 py-2 border text-left text-gray-700">Buy Price</th>
+              <th class="px-4 py-2 border text-left text-gray-700">Current Price</th>
+              <th class="px-4 py-2 border text-left text-gray-700">Current Value</th>
+              <th class="px-4 py-2 border text-left text-gray-700">Profit/Loss</th>
+              <th class="px-4 py-2 border text-left text-gray-700">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for stock in summary %}
+            <tr class="odd:bg-gray-50 even:bg-gray-100">
+              <td class="px-4 py-2 border text-gray-800">{{ stock.symbol }}</td>
+              <td class="px-4 py-2 border text-gray-800">{{ stock.quantity }}</td>
+              <td class="px-4 py-2 border text-gray-800">{{ stock.buy_price | round(2) }}</td>
+              <td class="px-4 py-2 border text-gray-800">{{ stock.current_price | round(2) }}</td>
+              <td class="px-4 py-2 border text-gray-800">{{ stock.current_value | round(2) }}</td>
+              <td class="px-4 py-2 border text-gray-800">
+                <span
+                  class="{% if stock.profit_loss >= 0 %}text-green-600{% else %}text-red-600{% endif %}"
+                  title="Profit/Loss"
+                >
+                  ₹{{ stock.profit_loss | round(2) }}
+                </span>
+              </td>
+              <td class="px-4 py-2 border">
+                <form action="/remove_stock" method="post" style="display: inline">
+                  <input type="hidden" name="symbol" value="{{ stock.symbol }}" />
+                  <button
+                    type="submit"
+                    class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 transition duration-300"
+                  >
+                    Remove
+                  </button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <!-- Total Investment and Profit/Loss -->
+        <div class="flex justify-between text-lg font-semibold text-gray-800 mt-4">
+          <p>Total Investment: ₹{{ invested | round(2) }}</p>
+          <p>Current Value: ₹{{ value | round(2) }}</p>
+          <p>Total P/L: ₹{{ pnl | round(2) }}</p>
+        </div>
+      </div>
+
+      <!-- Portfolio Chart -->
+      <div class="bg-white p-6 rounded-lg shadow-lg mt-8">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Portfolio Chart</h2>
+        <canvas id="portfolioChart" width="600" height="300"></canvas>
+      </div>
+
+      <div class="mt-8 text-center">
+        <a href="/" class="text-blue-600 hover:text-blue-700 text-lg font-medium">← Go Back</a>
+      </div>
+    </div>
+
+    <script>
+      const stockLabels = {{ summary | map(attribute='symbol') | list | tojson }};
+      const profitLossValues = {{ summary | map(attribute='profit_loss') | list | tojson }};
+      
+      const ctx = document.getElementById('portfolioChart').getContext('2d');
+      const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: stockLabels,
+          datasets: [{
+            label: 'Profit / Loss (₹)',
+            data: profitLossValues,
+            backgroundColor: profitLossValues.map(value => value >= 0 ? 'rgba(75, 192, 192, 0.6)' : 'rgba(255, 99, 132, 0.6)'),
+            borderColor: profitLossValues.map(value => value >= 0 ? 'rgba(75, 192, 192, 1)' : 'rgba(255, 99, 132, 1)'),
+            borderWidth: 1
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: '₹'
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

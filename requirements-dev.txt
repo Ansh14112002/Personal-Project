@@ -1,0 +1,42 @@
+beautifulsoup4==4.13.4       # For parsing and extracting data from HTML/XML (used in news scraping)
+blinker==1.9.0               # Provides support for event signaling in Flask
+certifi==2025.1.31           # Ensures secure SSL/TLS certificates for HTTPS requests
+charset-normalizer==3.4.1    # Handles character encoding detection (used by requests)
+click==8.1.8                 # A package for creating command-line interfaces (used by Flask)
+colorama==0.4.6              # Enables colored terminal text output (cross-platform support)
+contourpy==1.3.2             # Core dependency for contour plotting in matplotlib
+cycler==0.12.1               # Manages color/line cycling in plots (used by matplotlib)
+Flask==3.1.0                 # Lightweight web framework for building the app
+fonttools==4.57.0            # Required for handling fonts in matplotlib plots
+frozendict==2.4.6            # Immutable dictionary data structure
+idna==3.10                   # Handles Internationalized Domain Names (used by requests)
+itsdangerous==2.2.0          # Used by Flask to sign data securely (e.g., cookies)
+Jinja2==3.1.6                # Template engine used by Flask to render HTML
+joblib==1.4.2                # Used to save/load ML models efficiently
+kiwisolver==1.4.8            # Solves layout constraints in matplotlib
+MarkupSafe==3.0.2            # Escapes characters in HTML/Jinja templates to prevent injection
+matplotlib==3.10.1           # Used to visualize stock trends and ML forecasts
+multitasking==0.0.11         # Used by yfinance for concurrent operations
+nltk==3.9.1                  # Natural Language Toolkit used for sentiment analysis
+numpy==2.2.5                 # Core numerical computing library for ML and data analysis
+packaging==25.0              # Manages versions and dependencies
+pandas==2.2.3                # Data manipulation and analysis library used for stock data
+peewee==3.17.9               # Lightweight ORM (not used if you're using SQLAlchemy)
+pillow==11.2.1               # Python Imaging Library, required for image operations in matplotlib
+platformdirs==4.3.7          # Determines appropriate directories for storing data/configs
+pyparsing==3.2.3             # Used to parse expressions in matplotlib and packaging
+python-dateutil==2.9.0.post0 # Adds powerful extensions to the standard datetime module
+pytz==2025.2                 # Provides timezone support for datetime objects
+regex==2024.11.6             # Enhanced regular expression support (used in nltk)
+requests==2.32.3             # Allows HTTP requests to fetch news data and stock data
+scikit-learn==1.6.1          # Machine learning library used to forecast stock prices
+scipy==1.15.2                # Scientific computing tools used alongside scikit-learn
+six==1.17.0                  # Python 2 and 3 compatibility utility (used by several libraries)
+soupsieve==2.7               # Used by BeautifulSoup4 for CSS selectors
+threadpoolctl==3.6.0         # Controls threading in numpy/scikit-learn for performance
+tqdm==4.67.1                 # Progress bar utility for loops (used optionally)
+typing_extensions==4.13.2    # Backport of typing features for older Python versions
+tzdata==2025.2               # Provides timezone database for pandas and pytz
+urllib3==2.4.0               # HTTP client used under the hood by requests
+Werkzeug==3.1.3              # Flask’s WSGI utility library for request/response handling
+yfinance==0.2.0              # Used to fetch stock market data from Yahoo Finance

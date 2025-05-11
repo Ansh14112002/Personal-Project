@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Sentiment Analysis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen font-sans text-gray-800">
+
+    <div class="max-w-6xl mx-auto py-10 px-4">
+        <h1 class="text-4xl font-bold mb-6 text-center text-blue-700">
+            News Sentiment Analysis for <span class="text-black">{{ query }}</span>
+        </h1>
+
+        {% if analyzed %}
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <table class="min-w-full table-auto">
+                <thead class="bg-blue-600 text-white">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-sm font-medium">News Headline</th>
+                        <th class="px-6 py-3 text-left text-sm font-medium">Sentiment</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                    {% for headline, sentiment in analyzed %}
+                    <tr>
+                        <td class="px-6 py-4">{{ headline }}</td>
+                        <td class="px-6 py-4">
+                            {% if sentiment == 'BUY' %}
+                                <span class="inline-block px-3 py-1 text-sm font-semibold bg-green-100 text-green-700 rounded-full">Buy</span>
+                            {% elif sentiment == 'SELL' %}
+                                <span class="inline-block px-3 py-1 text-sm font-semibold bg-red-100 text-red-700 rounded-full">Sell</span>
+                            {% else %}
+                                <span class="inline-block px-3 py-1 text-sm font-semibold bg-yellow-100 text-yellow-700 rounded-full">Hold</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if decision %}
+        <div class="mt-8 bg-green-50 border-l-4 border-green-400 p-6 text-green-800 text-lg font-medium shadow-sm rounded-md">
+            ✅ Final Sentiment Decision: <span class="font-bold">{{ decision }}</span>
+        </div>
+        {% endif %}
+        
+        {% else %}
+        <div class="text-center py-8 text-xl text-gray-500">
+            No news headlines were found or analyzed.
+        </div>
+        {% endif %}
+
+        <div class="mt-8 text-center">
+            <a href="/" class="text-blue-600 hover:text-blue-800 transition duration-200 font-semibold inline-block">
+                ← Back to Home
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
+

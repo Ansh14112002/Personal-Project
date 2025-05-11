@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StockSense - Sentiment & Forecast</title>
+    <link rel="icon" href="https://img.icons8.com/fluency/48/graph.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="{{ url_for('static', filename='js/tailwind.config.js') }}"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body class="min-h-screen" style="background-color: rgb(23, 36, 68)">
+    <div class="fixed inset-0 overflow-hidden -z-10">
+      <div
+        class="absolute top-0 left-0 w-64 h-64 bg-blue-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"
+      ></div>
+      <div
+        class="absolute top-0 right-0 w-64 h-64 bg-green-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"
+      ></div>
+      <div
+        class="absolute bottom-0 left-0 w-64 h-64 bg-purple-900 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"
+      ></div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button
+      class="md:hidden menu-toggle fixed top-4 left-4 z-50 bg-white/80 backdrop-blur-sm p-3 rounded-xl shadow-lg hover:shadow-xl transition-all"
+      onclick="toggleMenu()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6 text-gray-800"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
+
+    <!-- Sidebar -->
+    <aside
+      class="hidden md:flex flex-col border-r border-gray-200 backdrop-blur-sm bg-white/80"
+    >
+      <div class="p-6">
+        <h1
+          class="text-3xl font-bold mb-10 flex items-center gap-3 animate__animated animate__fadeIn"
+        >
+          <span class="">📈 StockSense</span>
+        </h1>
+        <nav class="space-y-4">
+          <a href="/" class="active nav-item">
+            <span class="text-xl">🏠</span>
+            <span>Home</span>
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="/portfolio" class="nav-item">
+            <span class="text-xl">💼</span>
+            <span>Portfolio</span>
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="/quiz" class="nav-item">
+            <span class="text-xl">🧠</span>
+            <span>Quiz</span>
+            <span class="nav-indicator"></span>
+          </a>
+          <a href="/learning" class="nav-item">
+            <span class="text-xl">📚</span>
+            <span>Learning</span>
+            <span class="nav-indicator"></span>
+          </a>
+        </nav>
+      </div>
+
+      <div class="mt-auto p-6">
+        <div
+          class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-4 text-white shadow-lg"
+        >
+          <h3 class="font-semibold mb-2">Pro Tip</h3>
+          <p class="text-sm opacity-90">
+            "Diversify your portfolio to minimize risk."
+          </p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-4 md:p-8 ml-0 md:ml-64 transition-all duration-300">
+      <!-- Welcome Banner -->
+      <div
+        class="bg-gradient-to-r from-red-500 to-green-500 p-8 rounded-2xl mb-8 shadow-xl transition-all duration-500 hover:shadow-2xl animate__animated animate__fadeInUp"
+      >
+        <div class="max-w-4xl mx-auto">
+          <h2 class="text-4xl font-bold mb-3 text-white">
+            Welcome to StockSense
+            <span class="animate-pulse inline-block">🚀</span>
+          </h2>
+          <p class="text-lg text-white/90">
+            Analyze market sentiment, forecast stock trends, and manage your
+            portfolio — all in one place!
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Analyze Sentiment -->
+        <div
+          class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 card-hover border border-gray-200 animate__animated animate__fadeInUp animate__delay-1s"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-semibold flex items-center gap-3">
+              <span class="text-blue-500">📰</span>
+              <span>Analyze Stock Sentiment</span>
+            </h3>
+            <span
+              class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full"
+              >AI Powered</span
+            >
+          </div>
+          <form action="/news" method="post" class="flex flex-col space-y-4">
+            <div class="relative">
+              <input
+                type="text"
+                name="stock"
+                placeholder="e.g. Apple, Reliance"
+                required
+                class="w-full p-4 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10"
+              />
+              <span class="absolute right-3 top-4 text-gray-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <button
+              type="submit"
+              class="relative overflow-hidden bg-gradient-to-r from-red-400 to-red-600 flex justify-center items-center text-white py-3 px-6 rounded-xl hover:from-red-600 hover:to-red-700 transition-all shadow-md hover:shadow-lg"
+            >
+              <span data-original-text="Analyze News">Analyze News</span>
+              <div class="ml-3 hidden" id="newsLoader"></div>
+            </button>
+          </form>
+        </div>
+
+        <!-- Forecast Price -->
+        <div
+          class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 card-hover border border-gray-200 animate__animated animate__fadeInUp animate__delay-1s"
+        >
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-2xl font-semibold flex items-center gap-3">
+              <span class="text-green-500">📉</span>
+              <span>Predict Stock Price</span>
+            </h3>
+            <span
+              class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full"
+              >ML Model</span
+            >
+          </div>
+          <form
+            action="/forecast"
+            method="post"
+            class="flex flex-col space-y-4"
+          >
+            <div class="relative">
+              <input
+                type="text"
+                name="symbol"
+                placeholder="e.g. INFY.BO, AAPL"
+                required
+                class="w-full p-4 border rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 pr-10"
+              />
+              <span class="absolute right-3 top-4 text-gray-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <button
+              type="submit"
+              class="relative overflow-hidden bg-gradient-to-r from-green-500 to-green-600 flex justify-center items-center text-white py-3 px-6 rounded-xl hover:from-green-600 hover:to-green-700 transition-all shadow-md hover:shadow-lg"
+            >
+              <span data-original-text="Predict">Predict (30 Days)</span>
+              <div class="ml-3 hidden" id="forecastLoader"></div>
+            </button>
+          </form>
+        </div>
+
+        <!-- Learning Section -->
+        <div
+          class="text-center animate__animated animate__fadeInUp animate__delay-2s"
+        >
+          <a
+            href="/learning"
+            class="inline-block relative overflow-hidden bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-6 py-4 rounded-xl text-lg font-medium hover:from-yellow-600 hover:to-yellow-700 transition-all shadow-md hover:shadow-lg group"
+          >
+            <span class="relative z-10 flex items-center justify-center gap-2">
+              <span class="text-xl">📚</span>
+              <span>Start Learning</span>
+            </span>
+            <span
+              class="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-all duration-300"
+            ></span>
+          </a>
+          <p class="mt-3 text-sm text-gray-600">
+            Learn stock market fundamentals
+          </p>
+        </div>
+
+        <!-- Quiz Section -->
+        <div
+          class="text-center animate__animated animate__fadeInUp animate__delay-2s"
+        >
+          <a
+            href="/quiz"
+            class="inline-block relative overflow-hidden bg-gradient-to-r from-purple-500 to-purple-600 text-white px-6 py-4 rounded-xl text-lg font-medium hover:from-purple-600 hover:to-purple-700 transition-all shadow-md hover:shadow-lg group"
+          >
+            <span class="relative z-10 flex items-center justify-center gap-2">
+              <span class="text-xl">🧠</span>
+              <span>Take Quiz</span>
+            </span>
+            <span
+              class="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-all duration-300"
+            ></span>
+          </a>
+          <p class="mt-3 text-sm text-gray-600">Test your knowledge</p>
+        </div>
+      </div>
+
+      <!-- Portfolio Link -->
+      <div
+        class="mt-10 text-center animate__animated animate__fadeInUp animate__delay-3s"
+      >
+        <a
+          href="/portfolio"
+          class="inline-block relative overflow-hidden bg-gradient-to-r from-indigo-500 to-indigo-600 text-white px-8 py-4 rounded-xl text-lg font-medium hover:from-indigo-600 hover:to-indigo-700 transition-all shadow-lg hover:shadow-xl group"
+        >
+          <span class="relative z-10 flex items-center justify-center gap-3">
+            <span class="text-xl">💼</span>
+            <span>View Portfolio Overview</span>
+          </span>
+          <span
+            class="absolute inset-0 bg-white/10 group-hover:bg-white/20 transition-all duration-300"
+          ></span>
+        </a>
+      </div>
+
+      <!-- Market Status Widget -->
+      <div
+        class="mt-12 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg p-6 border border-gray-200 animate__animated animate__fadeInUp animate__delay-3s"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-xl font-semibold">Market Status</h3>
+          <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full"
+            >Live</span
+          >
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <div class="flex-1 min-w-[200px] bg-gray-100 p-4 rounded-xl">
+            <div class="flex items-center justify-between">
+              <span class="text-gray-600">S&P 500</span>
+              <span class="text-green-500 font-medium">+1.25%</span>
+            </div>
+            <div class="text-2xl font-bold mt-1">4,567.89</div>
+          </div>
+          <div class="flex-1 min-w-[200px] bg-gray-100 p-4 rounded-xl">
+            <div class="flex items-center justify-between">
+              <span class="text-gray-600">NASDAQ</span>
+              <span class="text-green-500 font-medium">+2.01%</span>
+            </div>
+            <div class="text-2xl font-bold mt-1">14,253.67</div>
+          </div>
+          <div class="flex-1 min-w-[200px] bg-gray-100 p-4 rounded-xl">
+            <div class="flex items-center justify-between">
+              <span class="text-gray-600">DOW</span>
+              <span class="text-red-500 font-medium">-0.35%</span>
+            </div>
+            <div class="text-2xl font-bold mt-1">34,567.12</div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>
