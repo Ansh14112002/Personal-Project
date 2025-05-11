@@ -1,3 +1,6 @@
+import nltk
+nltk.download('vader_lexicon')  # 🔥 This line fixes the Render crash
+
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 # Initialize VADER analyzer once
@@ -20,12 +23,6 @@ BOOST_WORDS = {
 def get_sentiment(text):
     """
     Analyzes the sentiment of a given text and classifies it into BUY, HOLD, or SELL.
-
-    Args:
-        text (str): The input text (e.g., a news headline).
-
-    Returns:
-        str: Sentiment category - "BUY", "SELL", or "HOLD".
     """
     if not text or not isinstance(text, str):
         return "HOLD"
